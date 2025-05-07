@@ -17,7 +17,6 @@ function sendMessage() {
   userMsg.textContent = "You: " + userText;
   messages.appendChild(userMsg);
 
-  // Basic local response logic
   let response = "";
   if (userText.includes("sad") || userText.includes("depressed")) {
     response = "EchoMind: I’m here with you. Remember what your father once said about resilience...";
