@@ -1,40 +1,20 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>EchoMind Onboarding</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EchoMind - AI Companion</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-    <div class="container">
-        <h1>🧠 EchoMind Onboarding</h1>
-        <form id="onboardingForm">
-            <label>What are your top 3 goals in life?</label>
-            <textarea name="goals" required></textarea>
-
-            <label>Describe your speaking style (e.g., calm, direct, funny):</label>
-            <input type="text" name="style" required>
-
-            <label>What kind of business do you run (or want to run)?</label>
-            <input type="text" name="business">
-
-            <label>What motivates you the most?</label>
-            <input type="text" name="motivation">
-
-            <label>Who do you trust the most in life (e.g., father, mentor)?</label>
-            <input type="text" name="mentor">
-
-            <button type="submit">Save and Chat with EchoMind</button>
-        </form>
-
-        <div id="chatbox" style="display:none;">
-            <div id="chatlog"></div>
-            <input type="text" id="userInput" placeholder="Talk to EchoMind...">
-            <button onclick="sendMessage()">Send</button>
-        </div>
+  <div class="container">
+    <h1>EchoMind - Your AI Brain</h1>
+    <div id="chat-box">
+      <div id="messages"></div>
+      <input type="text" id="user-input" placeholder="Type your message..." autofocus />
+      <button onclick="sendMessage()">Send</button>
     </div>
-
-    <script src="script.js"></script>
+  </div>
+  <script src="script.js"></script>
 </body>
 </html>

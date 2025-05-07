@@ -1,44 +1,38 @@
 
-let userProfile = {};
+const messages = document.getElementById('messages');
+const input = document.getElementById('user-input');
 
-document.getElementById('onboardingForm').addEventListener('submit', function(event) {
+input.addEventListener("keypress", function(event) {
+  if (event.key === "Enter") {
     event.preventDefault();
-    const data = new FormData(event.target);
-    data.forEach((value, key) => {
-        userProfile[key] = value;
-    });
-
-    localStorage.setItem("ecomind_user", JSON.stringify(userProfile));
-    document.getElementById('onboardingForm').style.display = 'none';
-    document.getElementById('chatbox').style.display = 'block';
-    document.getElementById('chatlog').innerHTML += `<div><strong>EchoMind:</strong> Hi! I’m ready to support you based on what I’ve learned from you.</div>`;
+    sendMessage();
+  }
 });
 
 function sendMessage() {
-    const input = document.getElementById('userInput');
-    const msg = input.value.trim();
-    if (msg === "") return;
+  const userText = input.value.trim();
+  if (userText === "") return;
 
-    document.getElementById('chatlog').innerHTML += `<div><strong>You:</strong> ${msg}</div>`;
-    input.value = "";
+  const userMsg = document.createElement("div");
+  userMsg.textContent = "You: " + userText;
+  messages.appendChild(userMsg);
 
-    const reply = generateEchoReply(msg);
-    document.getElementById('chatlog').innerHTML += `<div><strong>EchoMind:</strong> ${reply}</div>`;
-    document.getElementById('chatlog').scrollTop = document.getElementById('chatlog').scrollHeight;
-}
+  // Basic local response logic
+  let response = "";
+  if (userText.includes("sad") || userText.includes("depressed")) {
+    response = "EchoMind: I’m here with you. Remember what your father once said about resilience...";
+  } else if (userText.includes("motivate") || userText.includes("tired")) {
+    response = "EchoMind: Let’s remember your mission. You said you want to inspire millions — let’s keep going.";
+  } else if (userText.includes("what should I do")) {
+    response = "EchoMind: Based on your past logic, take a step back and reflect. You always find the best way forward.";
+  } else {
+    response = "EchoMind: That’s deep. I’ll learn more about your style and logic as we go.";
+  }
 
-function generateEchoReply(msg) {
-    if (!userProfile || !userProfile.style) {
-        return "Tell me more so I can respond like you would.";
-    }
+  const aiMsg = document.createElement("div");
+  aiMsg.textContent = response;
+  messages.appendChild(aiMsg);
 
-    if (msg.toLowerCase().includes("business")) {
-        return `Based on your business goals, I'd suggest focusing on clarity and momentum. Want help building a landing page?`;
-    }
-
-    if (msg.toLowerCase().includes("motivate")) {
-        return `Remember what you said motivates you: "${userProfile.motivation}". Let's use that today.`;
-    }
-
-    return `That’s a good point. Based on your tone (“${userProfile.style}”), I’d suggest responding calmly and confidently.`;
+  input.value = "";
+  messages.scrollTop = messages.scrollHeight;
 }
